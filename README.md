@@ -3,7 +3,11 @@
 
 ## React Client Application Routes
 
-- Route `/`: page content and purpose
+- Route `/`: home page, to show list of publised surveys
+- Route `/login`: login form, for admin authentication
+- Route `/responces`: list of surveys and number of their responces, by clicking on each survey it goes to navigation through responces. 
+- Route `/userResponces/:id`: it shows the user responces for the specific survey and with next and  
+
 - Route `/something/:param`: page content and purpose, param specification
 - ...
 
