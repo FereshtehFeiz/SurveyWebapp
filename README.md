@@ -112,9 +112,13 @@
   - Description: for adding answers by user
   - Response body: None
   - Request body: 
+
+  ``` JSON
+  [{
   req.body {
   surveyId: '314',
-  answers: [
+  answers: 
+  [
     { qid: 257, textarea: 'nice' },
     { qid: 260, radio: '3 days in week' },
     { qid: 259, radio: 'comfortable' },
@@ -123,21 +127,25 @@
   ],
   username: 'fereshteh'
 }
-
+}]
+```
 
 - GET `/api/answers/:id`
   - Description: for showing user answers for the given survey Id 
   - Request parameters: surveyId
   - Request body: None
   - Response body content: 
-   {
+  ``` JSON
+  [{
+
     questionId: 276,
     userId: 21,
     username: 'Angel',
     questionTitle: 'Describe your favourite pizza?',
     answer: 'Fresh ingredients'
   }
-
+}]
+```
 
   - GET `/api/userids/:id`
   - Description: listing the user Ids that answer the survey
