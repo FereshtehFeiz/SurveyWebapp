@@ -46,14 +46,16 @@
 - GET `/api/surveys`
   - Description: to get list of all the published surveys
   - Request body: None
-  - Response body: 
-   {
-          surveyId: 320,
-          title: 'Study Rooms ',
-          surveyCreator: 2,
-          isOpen: true,
-          counter: 1
-    }
+  - Response body: Array of objects, each describing one survey:
+    ``` JSON
+[{
+          "surveyId": 320,
+          "title": 'Study Rooms ',
+          "surveyCreator": 2,
+          "isOpen": true,
+          "counter": 1
+}]
+```
 
 - POST `/api/surveys`
   - Description: to create survey by a specific user 
