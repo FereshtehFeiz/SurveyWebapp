@@ -20,7 +20,7 @@
   - Response body: authenticated user 
     {
       "id": 1,
-      "username": "maria@polito.it", 
+      "email": "maria@polito.it", 
       "name": "Maria"
     }
 
@@ -32,7 +32,7 @@
 
     {
         "id": 1,
-        "username": "maria@polito.it", 
+        "email": "maria@polito.it", 
         "name": "Maria"
     }
 
