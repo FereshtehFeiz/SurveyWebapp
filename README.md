@@ -92,13 +92,13 @@
   
    ``` JSON
     {
-          Id: 259,
-          surveyId: 314,
-          questionTitle: "In overall how you evaluate the dormitory ?",
-          minAnswers: 1,
-          maxAnswers: 1,
-          orderNumber: 3,
-          optionsTitle: [ [Object], [Object], [Object], [Object] ]
+          "Id": 259,
+          "surveyId": 314,
+          "questionTitle": "In overall how you evaluate the dormitory ?",
+          "minAnswers": 1,
+          "maxAnswers": 1,
+          "orderNumber": 3,
+          "optionsTitle": [ [good], [bad], [suitable], [ok] ]
     }
     ```
   - Response body content: None
@@ -112,13 +112,13 @@
 
     ``` JSON
     [{
-          Id: 259,
-          surveyId: 314,
-          questionTitle: "In overall how you evaluate the dormitory ?",
-          minAnswers: 1,
-          maxAnswers: 1,
-          orderNumber: 3,
-          optionsTitle: [ [Object], [Object], [Object], [Object] ]
+          "Id": 259,
+          "surveyId": 314,
+          "questionTitle": "In overall how you evaluate the dormitory ?",
+          "minAnswers": 1,
+          "maxAnswers": 1,
+          "orderNumber": 3,
+          "optionsTitle": [ [good], [bad], [suitable], [ok] ]
     }]
     ```
 
@@ -131,13 +131,13 @@
 {
    surveyId: '314',
      answers: [
-    { qid: 257, textarea: "nice" },
-    { qid: 260, radio: "3 days in week" },
-    { qid: 259, radio: "comfortable" },
-    { qid: 262, checkedItems: [Array] },
-    { qid: 261, radio: "Kitchen is good" }
+    { "qid": 257, textarea: "nice" },
+    { "qid": 260, radio: "3 days in week" },
+    { "qid": 259, radio: "comfortable" },
+    { "qid": 262, checkedItems: [Array] },
+    { "qid": 261, radio: "Kitchen is good" }
   ],
-  username: "fereshteh"
+  "username": "fereshteh"
 }
 ```
 
@@ -157,7 +157,6 @@
     "answer": "Fresh ingredients"
 }
 ```
-
 
   - GET `/api/userids/:id`
   - Description: listing the user Ids that answer the survey
