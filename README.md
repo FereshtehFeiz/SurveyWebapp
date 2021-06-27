@@ -50,7 +50,7 @@
     ``` JSON
     [{
           "surveyId": 320,
-          "title": 'Study Rooms ',
+          "title": "Study Rooms",
           "surveyCreator": 2,
           "isOpen": true,
           "counter": 1
@@ -64,7 +64,7 @@
 
   ``` JSON
     {
-          "title": 'Study Rooms ',
+          "title": "Study Rooms",
           "surveyCreator": 2,
     }
     ```
@@ -74,60 +74,72 @@
   - Description: to get the list of surveys of a specific user 
   - Request parameters: userId
   - Request body: None
-  - Response body content: 
-    {
-      surveyId: 319,
-      title: 'Favorite Pizza',
-      surveyCreator: 1,
-      isOpen: true,
-      counter: 1
-    }
+  - Response body content: Array of objects, each describing one survey
+    
+     ``` JSON
+    [{
+          "surveyId": 320,
+          "title": "Study Rooms",
+          "surveyCreator": 2,
+          "isOpen": true,
+          "counter": 1
+    }]
+    ```
 
 - POST `/api/question`
   - Description: adding question for the last Survey Id that is created 
   - Request body:
-  { 
-    Id: 259,
-    surveyId: 314,
-    questionTitle: 'In overall how you evaluate the dormitory ?',
-    minAnswers: 1,
-    maxAnswers: 1,
-    orderNumber: 3,
-    optionsTitle: [ [Object], [Object], [Object], [Object] ]
-  }
+  
+   ``` JSON
+    {
+          Id: 259,
+          surveyId: 314,
+          questionTitle: "In overall how you evaluate the dormitory ?",
+          minAnswers: 1,
+          maxAnswers: 1,
+          orderNumber: 3,
+          optionsTitle: [ [Object], [Object], [Object], [Object] ]
+    }
+    ```
   - Response body content: None
   - Response: 200 OK (success)
 
 - GET `/api/survey/:id`
-  - Description: get questions of the given SurveyId 
+  - Description: get questions and its options of the given SurveyId 
   - Request parameters: surveyId
   - Request body: None
   - Response body content: 
-  {
-    Id: 259,
-    surveyId: 314,
-    questionTitle: 'In overall how you evaluate the dormitory ?',
-    minAnswers: 1,
-    maxAnswers: 1,
-    orderNumber: 3,
-    optionsTitle: [ [Object], [Object], [Object], [Object] ]
-  }
+
+    ``` JSON
+    [{
+          Id: 259,
+          surveyId: 314,
+          questionTitle: "In overall how you evaluate the dormitory ?",
+          minAnswers: 1,
+          maxAnswers: 1,
+          orderNumber: 3,
+          optionsTitle: [ [Object], [Object], [Object], [Object] ]
+    }]
+    ```
 
 - POST `/api/answer`
   - Description: for adding answers by user
   - Response body: None
-  - Request body: 
-  req.body {
-  surveyId: '314',
-  answers: [
-    { qid: 257, textarea: 'nice' },
-    { qid: 260, radio: '3 days in week' },
-    { qid: 259, radio: 'comfortable' },
+  - Request body:
+
+``` JSON
+{
+   surveyId: '314',
+     answers: [
+    { qid: 257, textarea: "nice" },
+    { qid: 260, radio: "3 days in week" },
+    { qid: 259, radio: "comfortable" },
     { qid: 262, checkedItems: [Array] },
-    { qid: 261, radio: 'Kitchen is good' }
+    { qid: 261, radio: "Kitchen is good" }
   ],
-  username: 'fereshteh'
+  username: "fereshteh"
 }
+```
 
 
 - GET `/api/answers/:id`
@@ -135,13 +147,16 @@
   - Request parameters: surveyId
   - Request body: None
   - Response body content: 
-   {
-    questionId: 276,
-    userId: 21,
-    username: 'Angel',
-    questionTitle: 'Describe your favourite pizza?',
-    answer: 'Fresh ingredients'
-  }
+  
+``` JSON
+{
+    "questionId": 276,
+    "userId": 21,
+    "username": "Angel",
+    "questionTitle": "Describe your favourite pizza?",
+    "answer": "Fresh ingredients"
+}
+```
 
 
   - GET `/api/userids/:id`
