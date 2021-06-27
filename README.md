@@ -20,8 +20,8 @@
   - Response body: authenticated user 
     {
       "id": 1,
-      "username": "john.doe@polito.it", 
-      "name": "John"
+      "username": "maria@polito.it", 
+      "name": "Maria"
     }
 
 - GET  `/api/sessions/current`
@@ -32,8 +32,8 @@
 
     {
         "id": 1,
-        "username": "john.doe@polito.it", 
-        "name": "John"
+        "username": "maria@polito.it", 
+        "name": "Maria"
     }
 
 
