@@ -126,6 +126,121 @@ app.delete('/api/sessions/current', (req, res) => {
     res.end();
 })
 
+/*** APIs ***/
+
+// GET /api/surveys
+app.get("/api/surveys", async (req, res) => {
+    try {
+        const surveys = await dao.listSurveys();
+        res.json(surveys);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+
+// creating a survey for a specific user
+app.post("/api/surveys", isLoggedIn, async (req, res) => {
+    try {
+        await dao.createSurvey(req.body);
+        res.end();
+    }
+    catch (error) {
+        console.log("POST /api/surveys error: ", error)
+        res.status(500).json(error);
+    }
+
+});
+
+
+
+// get the list of surveys of the logged in user
+// by using the user id
+app.get("/api/users/:id/surveys", isLoggedIn, async (req, res) => {
+
+    try {
+        const surveys = await dao.getSurveysByUser(req.params.id);
+        res.json(surveys);
+        console.log(surveys);
+    }
+    catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+});
+
+
+// adding question for the last Survey ID that
+app.post("/api/question", isLoggedIn, async (req, res) => {
+    try {
+        await dao.insertQuestion(req.body);
+        res.end();
+    }
+    catch (error) {
+        console.log("POST /api/question error: ", error)
+        res.status(500).json(error);
+    }
+
+});
+
+
+// GET /api/questions of the given SurveyId
+app.get("/api/survey/:id", async (req, res) => {
+    try {
+        const questions = await dao.getQuestions(req.params.id);
+        res.json(questions);
+        console.log(questions);
+    }
+    catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+});
+
+
+
+// adding answers
+app.post("/api/answer", async (req, res) => {
+    try {
+        console.log("req.body" , req.body);
+        await dao.insertAnswers(req.body);
+        res.end();
+    }
+    catch (error) {
+        console.log("POST /api/answer error: ", error)
+        res.status(500).json(error);
+    }
+
+});
+
+// for showing user answers for the given survey Id
+app.get("/api/answers/:id", async (req, res) => {
+    try {
+        const answers = await dao.listAnswers(req.params.id);
+        res.json(answers);
+        console.log("answers",answers);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+
+// listing the user Ids that answer the survey
+app.get("/api/userids/:id", async (req, res) => {
+    try {
+        const userIDs = await dao.allUserIDs(req.params.id);
+        res.json(userIDs);
+        console.log("user IDs",userIDs);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+
+
 
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}/`));

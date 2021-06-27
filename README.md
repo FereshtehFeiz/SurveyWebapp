@@ -170,9 +170,15 @@
 
 ## Screenshot
 
-![Screenshot](./img/screenshot.jpg)
+![Screenshot](./img/Screenshot1.png)
+![Screenshot](./img/Screenshot2.png)
+![Screenshot](./img/Screenshot3.png)
+![Screenshot](./img/Screenshot4.png)
+
 
 ## Users Credentials
 
-- fc@polito.it, password
-- maria@polito.it, ciao 
+- username: fc@polito.it, password: password
+  - created surveys: Pre-vaccination Checklist for COVID-19 Vaccines, Study Rooms   
+- username: maria@polito.it, password: ciao
+  - created surveys: Dormitory Facilities, Favorite Pizza

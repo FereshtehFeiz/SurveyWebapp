@@ -1,0 +1,10 @@
+.me-auto.nav a {
+    color: #b7b6b6 !important;
+    margin: 5px;
+    padding: 5px;
+    text-decoration: none;
+}
+.list-group-item a {color: #000;}
+.navbar a {  color: #b7b6b6 !important;}
+
+

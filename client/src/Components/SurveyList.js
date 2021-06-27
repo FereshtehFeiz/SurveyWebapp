@@ -1,21 +1,35 @@
-import { Container, Row , Col, ListGroup} from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Col, ListGroup, Container, Row, Alert } from "react-bootstrap";
+import { Link } from 'react-router-dom'
+
+
 
 function SurveyList(props) {
+
+
+
     return (
         <>
-        <Container fluid>
-        <Row className="justify-content-center mt-5">
-            <Col md={4}>
-            <h3>Published Surveys</h3>
-            <ListGroup>
-            <ListGroup.Item><Link to="/">Survey1</Link></ListGroup.Item>
-            <ListGroup.Item><Link to="/">Survey2</Link></ListGroup.Item>
-            <ListGroup.Item><Link to="/">Survey3</Link></ListGroup.Item>
-            </ListGroup>
-            </Col>
-        </Row>
-        </Container>
+            <Container fluid>
+                <Row className="justify-content-center mt-5">
+                    <Col md={4}>
+                        <h4>Published Surveys</h4>
+                        {props.surveys.length === 0 ? <Alert variant="info">No published survey available!</Alert> :
+                            <ListGroup>
+                                {props.surveys.map((element, idx) => {
+                                    return (
+                                        <ListGroup.Item key={"Item" + idx}>
+                                            <Link key={"link" + idx} onClick={() => props.changeSurvey(element.surveyId)}
+                                                to={"/survey/" + element.surveyId}
+                                            ><h6>{element.title}</h6></Link>
+                                        </ListGroup.Item>
+                                    );
+                                })}
+                            </ListGroup>
+                        }
+                    </Col>
+                </Row>
+            </Container>
+
         </>
     )
 }
