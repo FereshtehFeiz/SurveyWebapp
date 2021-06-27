@@ -98,7 +98,7 @@
           "minAnswers": 1,
           "maxAnswers": 1,
           "orderNumber": 3,
-          "optionsTitle": [ [good], [bad], [suitable], [ok] ]
+          "optionsTitle": [ ["good"], ["bad"], ["suitable"], ["ok"] ]
     }
     ```
   - Response body content: None
@@ -118,7 +118,7 @@
           "minAnswers": 1,
           "maxAnswers": 1,
           "orderNumber": 3,
-          "optionsTitle": [ [good], [bad], [suitable], [ok] ]
+          "optionsTitle": [ ["good"], ["bad"], ["suitable"], ["ok"] ]
     }]
     ```
 
