@@ -48,24 +48,27 @@
   - Request body: None
   - Response body: Array of objects, each describing one survey:
     ``` JSON
-[{
+    [{
           "surveyId": 320,
           "title": 'Study Rooms ',
           "surveyCreator": 2,
           "isOpen": true,
           "counter": 1
-}]
-```
+    }]
+    ```
 
 - POST `/api/surveys`
   - Description: to create survey by a specific user 
-  - Request body: 
-  {
-     title: 'Study Rooms ',
-     surveyCreator: 2,
-  }
   - Response body content: None
+  - Request body: 
 
+  ``` JSON
+    {
+          "title": 'Study Rooms ',
+          "surveyCreator": 2,
+    }
+    ```
+ 
 
 - GET `/api/users/:id/surveys`
   - Description: to get the list of surveys of a specific user 
