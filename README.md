@@ -129,12 +129,12 @@
 
 ``` JSON
 {
-   surveyId: '314',
-     answers: [
+   "surveyId": '314',
+     "answers": [
     { "qid": 257, "textarea": "nice" },
     { "qid": 260, "radio": "3 days in week" },
     { "qid": 259, "radio": "comfortable" },
-    { "qid": 262, "checkedItems": [Array] },
+    { "qid": 262, "checkedItems": ["Array"] },
     { "qid": 261, "radio": "Kitchen is good" }
   ],
   "username": "fereshteh"
