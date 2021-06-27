@@ -129,7 +129,7 @@
 
 ``` JSON
 {
-   "surveyId": '314',
+   "surveyId": 314,
      "answers": [
     { "qid": 257, "textarea": "nice" },
     { "qid": 260, "radio": "3 days in week" },
