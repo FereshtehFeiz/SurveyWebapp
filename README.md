@@ -199,7 +199,8 @@
 
 ## Users Credentials
 
-- username: fc@polito.it, password: password
-  - created surveys: Pre-vaccination Checklist for COVID-19 Vaccines, Study Rooms   
-- username: maria@polito.it, password: ciao
-  - created surveys: Dormitory Facilities, Favorite Pizza
+| email | password | name | surveys |
+|-------|----------|------|------|
+| fc@polito.it | password | Fulvio Corno | Pre-vaccination Checklist for COVID-19 Vaccines, Study Rooms  |
+| maria@polito.it | ciao | Maria | Dormitory Facilities, Favorite Pizza|
+ 
