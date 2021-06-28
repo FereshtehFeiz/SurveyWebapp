@@ -29,7 +29,9 @@ function SurveyResponces(props) {
                                                 <tr key={"row" + idx}>
                                                     <td>{element.title}</td>
                                                     <td>{icon.people}<span style={{ padding: '10px' }}>{element.counter}</span></td>
-                                                    <td><Link key={"link" + {idx}} to={"/userResponces/"+ element.surveyId}><Button variant="outline-info" onClick={() => props.showAnswers(element.surveyId)}>Responces</Button></Link></td>
+                                                    <td><Link key={"link" + { idx }} to={"/userResponces/" + element.surveyId}>
+                                                        <Button variant="outline-info"
+                                                        >Responces</Button></Link></td>
                                                 </tr>
                                             );
                                         })}

@@ -16,6 +16,7 @@ function QuestionForm(props) {
     const [maxAnswers, setmaxAnswers] = useState(1);
     const [openAnswerForce, setOpenAnswerForce] = useState('');
     const [disButton, setDisButton] = useState(true);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleClose = () => setShow(false);
 
@@ -29,6 +30,7 @@ function QuestionForm(props) {
         setOptions([{}]);
         setNumberOfOptions(1);
         setQuestionType('open');
+        setErrorMessage('');
     }
 
     function handleChange(i, event) {
@@ -50,7 +52,8 @@ function QuestionForm(props) {
             // console.log(item);
             if (item.value === undefined) {
                 // if option is empty
-                alert('Options could not be empty!')
+                // alert('Options could not be empty!')
+                setErrorMessage('Options could not be empty!');
                 setDisButton(false);
             }
             else {
@@ -112,21 +115,13 @@ function QuestionForm(props) {
     };
 
 
-    // function handleOrder() {
-    //     let array = [...props.questions];
-    //     // setQuestionOrder()
-    //     // console.log("lenght is ", props.questions.length + 1);
-    //     // let orderNumber = array.length + 1;
-    //     // console.log("the number of questions are : ", orderNumber)
-    //     // setQuestionOrder(props.questions.length + 1);
-    // }
-
     const handleSubmit = () => {
         let formValid = true
         let optionsValid = true
         // validations
         if (questionText === '') {
-            alert("The Question text should be entered!");
+            // alert("The Question text should be entered!");
+            setErrorMessage('The question text should be entered!');
             formValid = false;
         }
 
@@ -139,28 +134,33 @@ function QuestionForm(props) {
         }
 
         if (questionType === 'close' && !optionsValid) {
-            alert("Options could not be empty! Remove it or Enter its text!")
+            // alert("Options could not be empty! Remove it or Enter its text!")
+            setErrorMessage('Options could not be empty! Remove it or Enter its text!');
             formValid = false;
         }
 
         if (numberOfOptions === 1 && maxAnswers === 1 && questionType === 'close') {
-            alert("The closed question could not have only one single choice! Enter more options or change it to Open question!");
+            // alert("The closed question could not have only one single choice! Enter more options or change it to Open question!");
+            setErrorMessage('The closed question could not have only one single choice! Enter more options or change it to Open question!')
             formValid = false;
         }
 
         if (maxAnswers > numberOfOptions && questionType === 'close') {
-            alert('The Maximun Answers should be Less or Equal to the total number of options!');
+            // alert('The Maximun Answers should be Less or Equal to the total number of options!');
+            setErrorMessage('The Maximun Answers should be Less or Equal to the total number of options!')
             formValid = false;
         }
 
         if (minAnswers > maxAnswers && questionType === 'close') {
-            alert('The Minimum Answers should not be greater than Maximum Answers!');
+            // alert('The Minimum Answers should not be greater than Maximum Answers!');
+            setErrorMessage('The Minimum Answers should not be greater than Maximum Answers!');
             formValid = false
 
         }
 
         if (questionType === 'open' && openAnswerForce === '') {
-            alert('Please choose the question is Mandatory or Optional!');
+            // alert('Please choose the question is Mandatory or Optional!');
+            setErrorMessage('Please choose the question is Mandatory or Optional!');
             formValid = false
         }
 
@@ -183,6 +183,7 @@ function QuestionForm(props) {
             setmaxAnswers(1);
             setOptions([{}]);
             setNumberOfOptions(1);
+            setErrorMessage('')
 
         }
     }
@@ -307,7 +308,7 @@ function QuestionForm(props) {
                                                         <input
                                                             type="text"
                                                             placeholder="Enter option"
-                                                            value={field.value}
+                                                            value={field.value || ''}
                                                             onChange={e => handleChange(idx, e)}
                                                             required
                                                         />
@@ -357,6 +358,7 @@ function QuestionForm(props) {
                                     </Form.Group>
                                 </fieldset>}
                         </Col>
+                        {errorMessage ? <Alert variant='danger'>{errorMessage}</Alert> : ''}
                     </Row>
                 </Modal.Body>
 

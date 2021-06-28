@@ -9,12 +9,12 @@ import { Redirect } from 'react-router'
 
 function SurveyForm(props) {
     const { id } = useParams() // Keep the survey ID 
-    // const [validated, setValidated] = useState(false);
     const [userName, setUserName] = useState('');
     const [submitSurvey, setSubmitSurvey] = useState(false);
     const [finalResult, setFinalResult] = useState([]);
     const [pageRedirect, setPageRedirect] = useState(false);
     const [surveyQuestions, setSurveyQuestions] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
 
 
     // useEffect runs only when submitSurvey state variable is true
@@ -71,15 +71,13 @@ function SurveyForm(props) {
         let valid = true;
         event.preventDefault();
         event.stopPropagation();
-        // const form = event.currentTarget;
 
         if (userName === '') {
-            // setValidated(true); // enables bootstrap validation error report
             valid = false
-            alert('Enter your name!');
+            setErrorMessage('Enter your name!')
         }
         else {
-            // setValidated(false);
+            setErrorMessage('');
             // validation 
             // console.log(surveyQuestions.length);
             let questions = [...surveyQuestions];
@@ -109,8 +107,6 @@ function SurveyForm(props) {
                     // console.log("answer is not empty and is: ", answer[0]);
                     question.error = ""
 
-                    //     for(let answer of finalResult)
-                    //     {
                     if (answer[0].checkedItems) {
                         //check the lenght of array
                         // console.log("answer is not empty and is: ", answer[0].checkedItems);
@@ -124,6 +120,7 @@ function SurveyForm(props) {
                     }
 
                 }
+
             }
             // console.log("after check ", questions);
             setSurveyQuestions(questions);
@@ -135,10 +132,7 @@ function SurveyForm(props) {
             setSubmitSurvey(true);
             setPageRedirect(true);
         }
-        // else {
-        //     // console.log('not ok');
-        //     //  validation here 
-        // }
+
 
     };
 
@@ -151,6 +145,7 @@ function SurveyForm(props) {
                         <h4>Survey Questions</h4>
                         <Card>
                             <Card.Body>
+                                {errorMessage ? <Alert variant='danger'>{errorMessage}</Alert> : ''}
                                 <Form noValidate onSubmit={handleSubmit}>
                                     <ListGroup.Item>
                                         <Form.Group as={Row} controlId="userName">
@@ -198,7 +193,7 @@ function SurveyForm(props) {
 
                                                                 })}
                                                                 <>
-                                                                <h6><Badge variant="secondary">Maximum options to choose: {item.maxAnswers} - Minimum options to choose: {item.minAnswers}</Badge></h6>
+                                                                    <h6><Badge variant="secondary">Maximum options to choose: {item.maxAnswers} - Minimum options to choose: {item.minAnswers}</Badge></h6>
                                                                 </>
                                                             </>
                                                             : <>
@@ -224,10 +219,10 @@ function SurveyForm(props) {
                                                                     })}
                                                                 </Form.Group>
                                                             </>}
-                                                            <>
-                                                        {item.minAnswers >= 1 ? <h6><Badge variant="danger">Madatory</Badge> </h6> : <h6> <Badge variant="success">Optional</Badge></h6>}  
-                                                        </> 
-                                                         </>
+                                                        <>
+                                                            {item.minAnswers >= 1 ? <h6><Badge variant="danger">Madatory</Badge> </h6> : <h6> <Badge variant="success">Optional</Badge></h6>}
+                                                        </>
+                                                    </>
                                                     :
                                                     <>
                                                         {/* Opened Question */}

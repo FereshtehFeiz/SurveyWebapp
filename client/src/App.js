@@ -27,13 +27,9 @@ function App() {
   // all the published surveys
   const [surveys, setSurveys] = useState([]);
   const [userSurveys, setUserSurveys] = useState([]);
-  const [surveyAnswers, setSurveyAnswers] = useState([]);
-
-
   // A boolean state variable to know if
   // there are updates on DB
   const [updatesOnDB, setUpdatesOnDB] = useState(false);
-  // const [order, setOrder] = useState();
 
   // by reloading the page I have the list of all the surveys 
   useEffect(() => {
@@ -81,22 +77,6 @@ function App() {
   }, [user]);
 
 
-
-  // To show the User responces for a survey
-  const showAnswers = (surveyId) => {
-    // console.log("surveyID" , surveyId);
-    API.loadSurveyAnswers(surveyId).then(surveyAnswers => setSurveyAnswers(surveyAnswers));
-  }
-
-
-  //  // useEffect runs every time the userId object changes
-  //  useEffect(() => {
-  //   if (userId) {
-  //     API.loadSurveyAnswers().then(surveyAnswers => setSurveyAnswers(surveyAnswers));
-  //   }
-  // }, [userId]);
-
-
   // To Load the questions of a survey
   const changeSurvey = (surveyId) => {
     API.loadSurveyQuestions(surveyId).then(surveyQuestions => setSurveyQuestions(surveyQuestions));
@@ -104,17 +84,14 @@ function App() {
 
   // To Load the latest surveys when click on navigation button
   const loadSurveys = () => {
-    // API.loadSurveyQuestions(surveyId).then(surveyQuestions => setSurveyQuestions(surveyQuestions));
     API.loadAllSurveys().then(NewSurveys => setSurveys(NewSurveys));
   };
 
-  // useEffect runs only when the updatesOnDB state variable
-  // is true
+  // useEffect runs only when the updatesOnDB state variable is true
   useEffect(() => {
     if (updatesOnDB) {
       try {
         API.loadSurveyQuestions().then(surveyQuestions => setSurveyQuestions(surveyQuestions));
-        // API.loadSurveyAnswers().then(surveyAnswers => setSurveyAnswers(surveyAnswers));
         API.getUserSurveys(user.id).then(response => setUserSurveys(response));
         API.loadAllSurveys().then(NewSurveys => setSurveys(NewSurveys));
       }
@@ -129,7 +106,7 @@ function App() {
   const doLogIn = async (credentials) => {
     try {
       const user = await API.logIn(credentials);
-      console.log(user);
+      // console.log(user);
       if (user) {
         setUser(user);
         setLoggedIn(true);
@@ -148,7 +125,6 @@ function App() {
     // clean up everything
     setUserSurveys([]);
     setQuestions([]);
-    setSurveyAnswers([]);
   }
 
 
@@ -168,9 +144,9 @@ function App() {
       if (idx === 0) return;
       let array = [...questions];
       let index = idx - 1
-      console.log("idx is", idx);
-      console.log("array[idx]", array[idx]);
-      console.log("array[index]", array[index]);
+      // console.log("idx is", idx);
+      // console.log("array[idx]", array[idx]);
+      // console.log("array[index]", array[index]);
       array[idx].questionOrder -= 1;
       array[index].questionOrder += 1;
       let itemAbove = array[index];
@@ -180,7 +156,7 @@ function App() {
       // console.log(array);
       // console.log("idx" , idx)
       // console.log(array[idx]);
-      console.log("order in the array is", array[index].questionOrder)
+      // console.log("order in the array is", array[index].questionOrder)
       // console.log(questions[idx].questionOrder)
       // console.log("the old order of this item was:", idx)
       // setOrder(index);
@@ -196,8 +172,8 @@ function App() {
       array[idx + 1] = array[idx];
       array[idx] = itemBelow;
       setQuestions(array);
-      console.log("the new order of this item is:", index)
-      console.log("order in the array is", array[index].questionOrder)
+      // console.log("the new order of this item is:", index)
+      // console.log("order in the array is", array[index].questionOrder)
       // console.log("the old order of this item was:", idx)
       // setOrder(index);
     },
@@ -206,7 +182,6 @@ function App() {
       setQuestions([]);
     },
 
-    // getList: () => questions,
     updateDB: () => { setUpdatesOnDB(true) }
   };
 
@@ -233,7 +208,6 @@ function App() {
             <>
               {loggedIn ?
                 <SurveyResponces
-                  showAnswers={showAnswers}
                   userSurveys={userSurveys}
                 />
                 : <Redirect to="/login" />}
@@ -244,7 +218,6 @@ function App() {
             <>
               {loggedIn ?
                 <UserResponce
-                  surveyAnswers={surveyAnswers}
                 />
                 : <Redirect to="/login" />}
             </>

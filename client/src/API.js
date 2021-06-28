@@ -98,7 +98,6 @@ async function addQuestionOnDB(questionObj) {
         },
         body: JSON.stringify({ ...questionObj })
     })
-    console.log("addQuestionOnDB API questionObj" + questionObj)
 }
 
 
@@ -121,7 +120,7 @@ async function loadSurveyQuestions(surveyId) {
 }
 
 async function addAnswersOnDB(answerObj) {
-    console.log("API", answerObj);
+    // console.log("API", answerObj);
     await fetch(URL + `/api/answer`, {
         method: "POST",
         headers: {
@@ -129,24 +128,6 @@ async function addAnswersOnDB(answerObj) {
         },
         body: JSON.stringify(answerObj)
     })
-}
-
-async function loadSurveyAnswers(surveyId) {
-    try {
-        const response = await fetch(URL + `/api/answers/${surveyId}`).then(res => {
-            if (!res.ok)
-                throw Error(`[${res.status}] ${res.statusText}`)
-
-            return res;
-        });
-
-        const obj = await response.json();
-        return obj;
-    }
-    catch (err) {
-        console.log(`Something went Wrong: ${err.message} `)
-    }
-
 }
 
 
@@ -169,6 +150,27 @@ async function loadUserIDs(surveyId) {
 }
 
 
+async function loadSurveyAnswers(surveyId, userId) {
+    try {
+        const response = await fetch(URL + `/api/answers/${surveyId}/${userId}`).then(res => {
+            if (!res.ok)
+                throw Error(`[${res.status}] ${res.statusText}`)
 
-const API = { getUserInfo, logIn, logOut, loadAllSurveys, addSurveyOnDB, getUserSurveys, addQuestionOnDB, loadSurveyQuestions, addAnswersOnDB, loadSurveyAnswers, loadUserIDs  }
+            return res;
+        });
+
+        const obj = await response.json();
+        return obj;
+    }
+    catch (err) {
+        console.log(`Something went Wrong: ${err.message} `)
+    }
+
+}
+
+
+
+
+
+const API = { getUserInfo, logIn, logOut, loadAllSurveys, addSurveyOnDB, getUserSurveys, addQuestionOnDB, loadSurveyQuestions, addAnswersOnDB, loadSurveyAnswers, loadUserIDs }
 export default API

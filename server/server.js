@@ -215,9 +215,9 @@ app.post("/api/answer", async (req, res) => {
 });
 
 // for showing user answers for the given survey Id
-app.get("/api/answers/:id", async (req, res) => {
+app.get("/api/answers/:id/:userId", async (req, res) => {
     try {
-        const answers = await dao.listAnswers(req.params.id);
+        const answers = await dao.listAnswers(req.params.id,req.params.userId);
         res.json(answers);
         console.log("answers",answers);
     }
