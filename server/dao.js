@@ -43,7 +43,7 @@ exports.listSurveys = () => {
 exports.createSurvey = (survey) => {
   return new Promise((resolve, reject) => {
 
-    const sql = "INSERT INTO surveys(title, surveyCreator, isOpen, counter) VALUES(?, ?, 1, 0)";
+    const sql = "INSERT INTO surveys(title, surveyCreator, isOpen, counter) VALUES(?, ?, 0, 0)";
 
     db.run(sql, [survey.title, survey.surveyCreator, survey.isOpen, survey.counter], (err) => {
 
@@ -60,7 +60,7 @@ exports.createSurvey = (survey) => {
 // get surveys of a given user admin
 exports.getSurveysByUser = (surveyCreator) => {
   return new Promise((resolve, reject) => {
-    const sql = "SELECT * FROM surveys WHERE surveyCreator = ?";
+    const sql = "SELECT * FROM surveys WHERE surveyCreator = ? AND isOpen = 1;";
 
     db.all(sql, [surveyCreator], (err, rows) => {
       if (err) {
@@ -104,6 +104,16 @@ exports.insertQuestion = (question) => {
       resolve();
     });
 
+    // then update isOpen to 1 to show surveys with at least one question
+    const sql2 = "UPDATE surveys SET isOpen = 1 WHERE surveyId = (SELECT max(surveyId) FROM surveys)"
+    db.run(sql2, [], (err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
+    });
+    
   });
 };
 
@@ -239,7 +249,8 @@ exports.listAnswers = (surveyId, userId) => {
           userId: e.userId,
           username: e.username,
           questionTitle: e.questionTitle,
-          answer: e.answer,
+          answer: e.answer
+          // answer: JSON.parse(e.answer)
         });
       });
       console.log("answers", answers);
